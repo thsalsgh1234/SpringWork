@@ -1,0 +1,39 @@
+@charset "UTF-8";
+#insert{
+	margin-left: 3rem;
+}
+table{
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 95%;
+	margin: 10px auto;
+	border: 1px solid #cc;
+}
+
+th{
+	text-align: left;
+}
+
+tr{
+	background-color: gray;
+	border: 1px solid #ddd;
+}
+
+td,th{
+	padding: 8px;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+tr.content-body:nth-child(even){
+		background-color: #ccc;
+}
+
+tr.content-body:nth-child(odd){
+		background-color: #fff;
+}
+
+tr.content-body:hover{
+	background-color: #ddd;
+	cursor: pointer;
+}

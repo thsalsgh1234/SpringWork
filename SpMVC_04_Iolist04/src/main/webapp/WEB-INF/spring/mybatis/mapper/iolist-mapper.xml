@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.iolist.persistence.IolistDao">
+
+	<select id="selectAll" resultType="IolistDTO">
+		SELECT * FROM tbl_iolist
+		ORDER BY io_seq DESC
+	</select>
+
+	<select id="viewSelectAll" resultType="IolistVO">
+		select
+			IO_SEQ AS IO_SEQ,
+			IO_DATE AS IO_DATE,
+			IO_INOUT AS IO_INOUT,
+			D_CEO AS IO_DCEO,
+			D_NAME AS D_NAME,
+			D_CEO AS D_CEO,
+			IO_PCODE AS IO_PCODE,
+			P_NAME AS P_NAME,
+			P_IPRICE AS P_IPRICE,
+			P_OPRICE AS P_OPRICE,
+			P_VAT AS P_VAT,
+			IO_QTY AS IO_QTY,
+			IO_PRICE AS IO_PRICE,
+			IO_TOTAL AS IO_TOTAL
+
+			FROM tbl_iolist io
+			    LEFT JOIN tbl_dept d
+			        ON io.io_dcode = D.d_code
+			    LEFT JOIN tbl_product p
+			        ON io.io_pcode = P.p_code
+			ORDER BY IO_SEQ DESC
+	</select>
+
+		
+	<insert id="insert" parameterType="IolistDTO">
+		INSERT INTO tbl_iolist(			
+			IO_SEQ,
+			IO_DATE,
+			IO_INOUT,
+			IO_QTY,
+			IO_PRICE,
+			IO_TOTAL,
+			IO_PCODE,
+			IO_DCODE
+		)VALUES(
+			SEQ_IOLIST.NEXTVAL,
+			#{io_date},
+			#{io_inout},
+			#{io_qty},
+			#{io_price},
+			#{io_total},
+			#{io_pcode},
+			#{io_dcode}
+		)
+	</insert>
+	<update id="update" parameterType="DeptDTO">
+		 UPDATE tbl_dept set 
+		 	D_NAME = #{d_name},
+			D_CEO = #{d_ceo},
+			D_TEL = #{d_tel},
+			D_ADDR = #{d_addr}
+		WHERE D_CODE = #{d_code}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM tbl_dept
+		WHERE d_code = #{d_code}
+		
+	</delete>
+
+</mapper> 
